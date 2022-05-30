@@ -4,7 +4,11 @@ class BookRequestsController < ApplicationController
 
   # GET /book_requests or /book_requests.json
   def index
-    @book_requests = BookRequest.all
+    if current_user.admin?
+      @book_requests = BookRequest.all
+    else
+      @book_requests = current_user.book_requests
+    end
   end
 
   # GET /book_requests/1 or /book_requests/1.json
@@ -26,7 +30,7 @@ class BookRequestsController < ApplicationController
     if current_user.admin?
       flash[:alert] = "User not found."
     else
-      @book_request = current_user.book_request.new(book_request_params)
+      @book_request = current_user.book_requests.new(book_request_params)
       #byebug
       respond_to do |format|
         if @book_request.save

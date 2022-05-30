@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2022_05_29_173450) do
     t.bigint "book_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "status"
+    t.integer "status", default: 0
     t.datetime "request_date"
     t.index ["book_id"], name: "index_book_requests_on_book_id"
     t.index ["user_id", "book_id"], name: "index_book_requests_on_user_id_and_book_id", unique: true

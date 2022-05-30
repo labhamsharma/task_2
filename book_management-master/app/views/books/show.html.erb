@@ -17,8 +17,6 @@
 
 <%= link_to 'Edit', edit_book_path(@book) %> |
 <%= link_to 'Back', books_path %>
-<% if !current_user.admin? && !@book.book_request.present?%>
-  <%= button_to 'Book request', book_requests_path(book_request:{ book_id: @book.id, request_date: Date.today}), method: :post %>
-<% else %>
-  <%= button_to 'Cancel', book_request_path(id: @book.book_request.ids), method: :delete %>  
+<% if !current_user.admin?%>
+  <%= button_to 'Book request', book_requests_path(book_request:{ book_id: @book.id, request_date: Date.today}), method: :post %>  
 <% end %>

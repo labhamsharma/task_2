@@ -6,13 +6,15 @@
   <table class="table table-striped">
     <thead>
       <tr>
+        <th>Email</th>
+
+        <th>Name</th>
+
         <th>Title</th>
     
         <th>Author</th>
       
-        <th>Description</th>
-        
-        <th>Status</td>
+        <th>Status</th>
       </tr>
     </thead>
 
@@ -21,6 +23,7 @@
     <% @book_requests.each do |book_request| %>
       <tr>
           <td ><%= book_request.user.email %></td>
+          <td ><%= book_request.user.name %></td>
           <td><%= book_request.book.title %></td>
           <td><%= book_request.book.author %></td>
           <td><%= book_request.status %></td>
@@ -38,6 +41,9 @@
                   <%end%>
                 <%end%>
               <%end%>
+            </td>
+          <% elsif book_request.status.eql?("pending")%>
+            <td><%= button_to 'Cancel', book_request_path(id: book_request.id), method: :delete %>
             </td>
           <% end %> 
       </tr>
